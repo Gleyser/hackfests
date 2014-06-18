@@ -38,5 +38,26 @@ public class SistemaTest {
 		Assert.assertEquals(evento5, sistema.getEventos().get(4));		
 		
 	}
+	
+	@Test
+	public void testaRemoverEventoNoSistema(){
+		sistema.addEvento(evento1);
+		sistema.addEvento(evento2);
+		sistema.addEvento(evento3);
+		sistema.addEvento(evento4);
+		sistema.addEvento(evento5);
+		Assert.assertEquals(5, sistema.numDeEventos());
+		Assert.assertEquals(evento1, sistema.getEventos().get(0));
+		Assert.assertEquals(evento5, sistema.getEventos().get(4));	
+		sistema.removeEvento(evento1);
+		Assert.assertEquals(evento2, sistema.getEventos().get(0));
+		sistema.removeEvento(evento2);
+		Assert.assertFalse(sistema.contemEvento(evento2));
+		Assert.assertEquals(evento3, sistema.getEventos().get(0));
+		Assert.assertEquals(3, sistema.numDeEventos());
+		Assert.assertEquals(evento5, sistema.getEventos().get(2));
+		Assert.assertFalse(sistema.removeEvento(evento2));
+		
+	}
 
 }

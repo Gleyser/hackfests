@@ -23,6 +23,10 @@ public class Sistema {
 		this.eventos.add(evento);
 	}
 	
+	public boolean removeEvento(Evento evento){
+		return this.eventos.remove(evento);
+	}
+	
 	public void EventoOrdenadosPorTema(){
 		
 	}

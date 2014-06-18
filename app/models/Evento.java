@@ -52,6 +52,11 @@ public class Evento {
 	public void setPessoas(List<Pessoa> pessoas) {
 		this.pessoas = pessoas;
 	}
+	
+	public int numDePessoasQueConfirmaram(){
+		return this.pessoas.size();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
