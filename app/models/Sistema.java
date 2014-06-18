@@ -27,15 +27,17 @@ public class Sistema {
 		return this.eventos.remove(evento);
 	}
 	
-	public void EventoOrdenadosPorTema(){
-		
+	public List<Evento> EventosPorTema(Tema tema){
+		List<Evento> retorno = new ArrayList<Evento>();
+		for (Evento evento: this.eventos){
+			if (evento.getTemas().contains(tema)){
+				retorno.add(evento);
+			}
+		}
+		return retorno;
 	}
 	
-	public void EventoPorTema(Tema tema){
-		
-	}
-	
-	public void EventoOrdenadosPorQuantidadeDePessoas(){
+	public List<Evento> EventosOrdenadosPorQuantidadeDePessoas(){
 		
 	}
 	

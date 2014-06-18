@@ -57,6 +57,16 @@ public class Evento {
 		return this.pessoas.size();
 	}
 	
+	public void addTema(Tema tema) {
+		this.temas.add(tema);
+		
+	}
+	
+	public boolean removeTema(Tema tema) {
+		return this.temas.remove(tema);
+		
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -105,9 +115,6 @@ public class Evento {
 			return false;
 		return true;
 	}
-	
-	
-	
 	
 
 }
