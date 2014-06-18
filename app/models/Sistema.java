@@ -35,5 +35,13 @@ public class Sistema {
 		
 	}
 	
+	public int numDeEventos(){
+		return this.eventos.size();
+	}
+	
+	public boolean contemEvento(Evento evento){
+		return this.eventos.contains(evento);
+	}
+	
 
 }
