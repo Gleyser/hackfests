@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 
@@ -35,9 +36,11 @@ public class Evento implements Comparable<Evento> {
 	@Column
 	private String data;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn
-	private Pessoa admin;
+	@Column
+	private String nomeAdmin;
+	
+	@Column
+	private String emailAdmin;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn
@@ -52,11 +55,12 @@ public class Evento implements Comparable<Evento> {
 		this.temas = new ArrayList<Tema>();
 		this.PessoasQueConfirmaram = new ArrayList<Pessoa>();;
 	}
-	public Evento(String nome, String descricao, String data, Pessoa admin) {
+	public Evento(String nome, String descricao, String data, String nomeAdmin, String emailAdmin) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.data = data;
-		this.admin = admin;
+		this.nomeAdmin = nomeAdmin;
+		this.emailAdmin = emailAdmin;
 		this.temas = new ArrayList<Tema>();
 		this.PessoasQueConfirmaram = new ArrayList<Pessoa>();
 		
@@ -85,12 +89,18 @@ public class Evento implements Comparable<Evento> {
 	public void setTemas(List<Tema> temas) {
 		this.temas = temas;
 	}	
-	
-	public Pessoa getAdmin() {
-		return admin;
+		
+	public String getNomeAdmin() {
+		return nomeAdmin;
 	}
-	public void setAdmin(Pessoa admin) {
-		this.admin = admin;
+	public void setNomeAdmin(String nomeAdmin) {
+		this.nomeAdmin = nomeAdmin;
+	}
+	public String getEmailAdmin() {
+		return emailAdmin;
+	}
+	public void setEmailAdmin(String emailAdmin) {
+		this.emailAdmin = emailAdmin;
 	}
 	public List<Pessoa> getNumDePessoasQueConfirmaram() {
 		return PessoasQueConfirmaram;
@@ -158,11 +168,14 @@ public class Evento implements Comparable<Evento> {
 				* result
 				+ ((PessoasQueConfirmaram == null) ? 0 : PessoasQueConfirmaram
 						.hashCode());
-		result = prime * result + ((admin == null) ? 0 : admin.hashCode());
 		result = prime * result + ((data == null) ? 0 : data.hashCode());
 		result = prime * result
 				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result
+				+ ((emailAdmin == null) ? 0 : emailAdmin.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result
+				+ ((nomeAdmin == null) ? 0 : nomeAdmin.hashCode());
 		result = prime * result + ((temas == null) ? 0 : temas.hashCode());
 		return result;
 	}
@@ -180,11 +193,6 @@ public class Evento implements Comparable<Evento> {
 				return false;
 		} else if (!PessoasQueConfirmaram.equals(other.PessoasQueConfirmaram))
 			return false;
-		if (admin == null) {
-			if (other.admin != null)
-				return false;
-		} else if (!admin.equals(other.admin))
-			return false;
 		if (data == null) {
 			if (other.data != null)
 				return false;
@@ -195,10 +203,20 @@ public class Evento implements Comparable<Evento> {
 				return false;
 		} else if (!descricao.equals(other.descricao))
 			return false;
+		if (emailAdmin == null) {
+			if (other.emailAdmin != null)
+				return false;
+		} else if (!emailAdmin.equals(other.emailAdmin))
+			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
+			return false;
+		if (nomeAdmin == null) {
+			if (other.nomeAdmin != null)
+				return false;
+		} else if (!nomeAdmin.equals(other.nomeAdmin))
 			return false;
 		if (temas == null) {
 			if (other.temas != null)
@@ -207,5 +225,6 @@ public class Evento implements Comparable<Evento> {
 			return false;
 		return true;
 	}
+	
 
 }
