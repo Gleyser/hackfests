@@ -55,6 +55,11 @@ public class SistemaTest {
 		evento9.addTema(tema1);
 		evento10.addTema(tema4);
 		
+		evento1.setPessoas(10);
+		evento2.setPessoas(2);
+		evento4.setPessoas(8);
+		evento10.setPessoas(12);
+		
 		sistema.addEvento(evento1);
 		sistema.addEvento(evento2);
 		sistema.addEvento(evento3);
@@ -98,6 +103,33 @@ public class SistemaTest {
 	@Test
 	public void testaEventosPorTema(){
 		Assert.assertEquals(4, sistema.EventosPorTema(tema1).size());
+		Assert.assertEquals(0, sistema.EventosPorTema(tema2).size());
+		Assert.assertEquals(2, sistema.EventosPorTema(tema3).size());
+		Assert.assertEquals(2, sistema.EventosPorTema(tema4).size());
+		Assert.assertEquals(2, sistema.EventosPorTema(tema5).size());
+		Assert.assertEquals(evento1, sistema.EventosPorTema(tema1).get(0));
+		Assert.assertEquals(evento2, sistema.EventosPorTema(tema5).get(0));
+		sistema.removeEvento(evento1);
+		// Testando apos uma remocao
+		Assert.assertEquals(evento4, sistema.EventosPorTema(tema1).get(0));
+	}
+	
+	@Test
+	public void testaOrdenaPorNumeroDePessoas(){
+		Assert.assertEquals(evento10, sistema.EventosOrdenadosPorQuantidadeDePessoas().get(0));
+		Assert.assertEquals(evento1, sistema.EventosOrdenadosPorQuantidadeDePessoas().get(1));
+		Assert.assertEquals(evento4, sistema.EventosOrdenadosPorQuantidadeDePessoas().get(2));
+		Assert.assertEquals(evento2, sistema.EventosOrdenadosPorQuantidadeDePessoas().get(3));
+		Assert.assertEquals(evento3, sistema.EventosOrdenadosPorQuantidadeDePessoas().get(4));
+		// Adicionar mais no evento 1 para verificar se ele passar a ser o primeiro da lista
+		sistema.addMaisUmaPessoaNoEvento(evento1);
+		sistema.addMaisUmaPessoaNoEvento(evento1);
+		sistema.addMaisUmaPessoaNoEvento(evento1);
+		Assert.assertEquals(evento1, sistema.EventosOrdenadosPorQuantidadeDePessoas().get(0));
+		// Adicionar mais no evento 10 para verificar se ele volta a ser o primeiro da lista
+		sistema.addMaisUmaPessoaNoEvento(evento10);
+		sistema.addMaisUmaPessoaNoEvento(evento10);
+		Assert.assertEquals(evento10, sistema.EventosOrdenadosPorQuantidadeDePessoas().get(0));
 	}
 
 }

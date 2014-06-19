@@ -2,6 +2,7 @@ package models;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Sistema {
@@ -38,7 +39,9 @@ public class Sistema {
 	}
 	
 	public List<Evento> EventosOrdenadosPorQuantidadeDePessoas(){
-		
+		List<Evento> copiaDeEventos = this.eventos;
+		Collections.sort(copiaDeEventos);
+		return copiaDeEventos;
 	}
 	
 	public int numDeEventos(){
@@ -47,6 +50,20 @@ public class Sistema {
 	
 	public boolean contemEvento(Evento evento){
 		return this.eventos.contains(evento);
+	}
+	
+	public void addMaisUmaPessoaNoEvento(Evento evento){
+		if (this.eventos.contains(evento)){
+			for (Evento evento1 : this.eventos){
+				if (evento1.equals(evento)){
+					Evento aux = evento1;
+					aux.addParticipanteNoEvento();
+					this.eventos.remove(evento1);
+					this.eventos.add(aux);
+					return;
+				}
+			}
+		}
 	}
 	
 

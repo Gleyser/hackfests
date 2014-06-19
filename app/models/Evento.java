@@ -3,23 +3,23 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Evento {
+public class Evento implements Comparable<Evento> {
 	private String nome;
 	private String descricao;
 	private String data;
 	private List<Tema> temas;
-	private List<Pessoa> pessoas;
+	private int numDePessoas;
 
 	public Evento(){
 		this.temas = new ArrayList<Tema>();
-		this.pessoas = new ArrayList<Pessoa>();
+		this.numDePessoas = 0;
 	}
 	public Evento(String nome, String descricao, String data) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.data = data;
 		this.temas = new ArrayList<Tema>();
-		this.pessoas = new ArrayList<Pessoa>();
+		this.numDePessoas = 0;
 		
 	}
 	public String getNome() {
@@ -46,15 +46,15 @@ public class Evento {
 	public void setTemas(List<Tema> temas) {
 		this.temas = temas;
 	}
-	public List<Pessoa> getPessoas() {
-		return pessoas;
+	public int getNumDePessoas() {
+		return numDePessoas;
 	}
-	public void setPessoas(List<Pessoa> pessoas) {
-		this.pessoas = pessoas;
-	}
+	public void setPessoas(int numDePessoas) {
+		this.numDePessoas = numDePessoas;
+	}	
 	
-	public int numDePessoasQueConfirmaram(){
-		return this.pessoas.size();
+	public void addParticipanteNoEvento() {
+		this.numDePessoas++;
 	}
 	
 	public void addTema(Tema tema) {
@@ -68,6 +68,17 @@ public class Evento {
 	}
 	
 	@Override
+	public int compareTo(Evento evento) {
+		if (this.numDePessoas > evento.getNumDePessoas()) {
+		      return -1;
+		    }
+	    if (this.numDePessoas < evento.getNumDePessoas()) {
+		      return 1;
+		    }
+	    return 0;
+		  
+	}
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -75,7 +86,7 @@ public class Evento {
 		result = prime * result
 				+ ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((pessoas == null) ? 0 : pessoas.hashCode());
+		result = prime * result + numDePessoas;
 		result = prime * result + ((temas == null) ? 0 : temas.hashCode());
 		return result;
 	}
@@ -103,10 +114,7 @@ public class Evento {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (pessoas == null) {
-			if (other.pessoas != null)
-				return false;
-		} else if (!pessoas.equals(other.pessoas))
+		if (numDePessoas != other.numDePessoas)
 			return false;
 		if (temas == null) {
 			if (other.temas != null)
@@ -115,6 +123,8 @@ public class Evento {
 			return false;
 		return true;
 	}
+	
+	
 	
 
 }
