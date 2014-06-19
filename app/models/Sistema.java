@@ -5,9 +5,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.*;
+
+@Entity(name = "Sistema")
 public class Sistema {
+	// Todo Id tem que ter o GeneratedValue a nÃ£o ser que ele seja setado
+	@Id
+	@SequenceGenerator(name = "SISTEMA_SEQUENCE", sequenceName = "SISTEMA_SEQUENCE", allocationSize = 1, initialValue = 0)
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	// Usar Id sempre Long
+	private Long id;	
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn
 	private List<Evento> eventos;
 	
+	// Construtor vazio para o Hibernate criar os objetos 
 	public Sistema(){
 		this.eventos = new ArrayList<Evento>();
 	}
@@ -52,19 +65,40 @@ public class Sistema {
 		return this.eventos.contains(evento);
 	}
 	
-	public void addMaisUmaPessoaNoEvento(Evento evento){
+	public void addPessoaNoEvento(Evento evento, Pessoa pessoa){
 		if (this.eventos.contains(evento)){
-			for (Evento evento1 : this.eventos){
-				if (evento1.equals(evento)){
-					Evento aux = evento1;
-					aux.addParticipanteNoEvento();
-					this.eventos.remove(evento1);
-					this.eventos.add(aux);
+			for (Evento eventoaux : this.eventos){
+				if (eventoaux.equals(evento)){
+					Evento eventoFinal = eventoaux;
+					eventoFinal.addParticipanteNoEvento(pessoa);
+					this.eventos.remove(eventoaux);
+					this.eventos.add(eventoFinal);
 					return;
 				}
 			}
 		}
 	}
+	
+	public void removePessoaDoEvento(Evento evento, Pessoa pessoa){
+		if (this.eventos.contains(evento)){
+			for (Evento eventoaux : this.eventos){
+				if (eventoaux.equals(evento)){
+					this.eventos.remove(eventoaux);
+					return;
+				}
+			}
+		}
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	
 	
 
 }

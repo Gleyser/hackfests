@@ -3,23 +3,41 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
+@Entity(name = "Evento")
 public class Evento implements Comparable<Evento> {
+	
+	// Gerador de Sequencia para o Id
+	// Todo Id tem que ter o GeneratedValue a não ser que ele seja setado
+	@Id
+	@SequenceGenerator(name = "EVENTO_SEQUENCE", sequenceName = "EVENTO_SEQUENCE", allocationSize = 1, initialValue = 0)
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	// Usar Id sempre Long
+	private Long id;
+		
 	private String nome;
 	private String descricao;
 	private String data;
+	private Pessoa admin;
 	private List<Tema> temas;
-	private int numDePessoas;
+	private List<Pessoa> PessoasQueConfirmaram;
 
 	public Evento(){
 		this.temas = new ArrayList<Tema>();
-		this.numDePessoas = 0;
+		this.PessoasQueConfirmaram = new ArrayList<Pessoa>();;
 	}
-	public Evento(String nome, String descricao, String data) {
+	public Evento(String nome, String descricao, String data, Pessoa admin) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.data = data;
+		this.admin = admin;
 		this.temas = new ArrayList<Tema>();
-		this.numDePessoas = 0;
+		this.PessoasQueConfirmaram = new ArrayList<Pessoa>();
 		
 	}
 	public String getNome() {
@@ -45,16 +63,36 @@ public class Evento implements Comparable<Evento> {
 	}
 	public void setTemas(List<Tema> temas) {
 		this.temas = temas;
-	}
-	public int getNumDePessoas() {
-		return numDePessoas;
-	}
-	public void setPessoas(int numDePessoas) {
-		this.numDePessoas = numDePessoas;
 	}	
 	
-	public void addParticipanteNoEvento() {
-		this.numDePessoas++;
+	public Pessoa getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Pessoa admin) {
+		this.admin = admin;
+	}
+	public List<Pessoa> getNumDePessoasQueConfirmaram() {
+		return PessoasQueConfirmaram;
+	}
+	public void setNumDePessoasQueConfirmaram(
+			List<Pessoa> numDePessoasQueConfirmaram) {
+		this.PessoasQueConfirmaram = numDePessoasQueConfirmaram;
+	}
+	public void addParticipanteNoEvento(Pessoa pessoa) {
+		if (!this.PessoasQueConfirmaram.contains(pessoa)){
+		this.PessoasQueConfirmaram.add(pessoa);
+		}
+	}
+	
+	public void removerParticipanteNoEvento(Pessoa pessoa) {
+		if (this.PessoasQueConfirmaram.contains(pessoa)){
+			this.PessoasQueConfirmaram.remove(pessoa);
+		}
+		
+	}
+	
+	public int numDePessoasQueConfirmaram(){
+		return this.PessoasQueConfirmaram.size();
 	}
 	
 	public void addTema(Tema tema) {
@@ -69,10 +107,10 @@ public class Evento implements Comparable<Evento> {
 	
 	@Override
 	public int compareTo(Evento evento) {
-		if (this.numDePessoas > evento.getNumDePessoas()) {
+		if (this.PessoasQueConfirmaram.size() > evento.numDePessoasQueConfirmaram()) {
 		      return -1;
 		    }
-	    if (this.numDePessoas < evento.getNumDePessoas()) {
+	    if (this.PessoasQueConfirmaram.size() < evento.numDePessoasQueConfirmaram()) {
 		      return 1;
 		    }
 	    return 0;
@@ -82,11 +120,15 @@ public class Evento implements Comparable<Evento> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime
+				* result
+				+ ((PessoasQueConfirmaram == null) ? 0 : PessoasQueConfirmaram
+						.hashCode());
+		result = prime * result + ((admin == null) ? 0 : admin.hashCode());
 		result = prime * result + ((data == null) ? 0 : data.hashCode());
 		result = prime * result
 				+ ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + numDePessoas;
 		result = prime * result + ((temas == null) ? 0 : temas.hashCode());
 		return result;
 	}
@@ -99,6 +141,16 @@ public class Evento implements Comparable<Evento> {
 		if (getClass() != obj.getClass())
 			return false;
 		Evento other = (Evento) obj;
+		if (PessoasQueConfirmaram == null) {
+			if (other.PessoasQueConfirmaram != null)
+				return false;
+		} else if (!PessoasQueConfirmaram.equals(other.PessoasQueConfirmaram))
+			return false;
+		if (admin == null) {
+			if (other.admin != null)
+				return false;
+		} else if (!admin.equals(other.admin))
+			return false;
 		if (data == null) {
 			if (other.data != null)
 				return false;
@@ -114,8 +166,6 @@ public class Evento implements Comparable<Evento> {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (numDePessoas != other.numDePessoas)
-			return false;
 		if (temas == null) {
 			if (other.temas != null)
 				return false;
@@ -123,6 +173,8 @@ public class Evento implements Comparable<Evento> {
 			return false;
 		return true;
 	}
+	
+	
 	
 	
 	
