@@ -3,11 +3,17 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
 
 @Entity(name = "Evento")
 public class Evento implements Comparable<Evento> {
@@ -19,14 +25,29 @@ public class Evento implements Comparable<Evento> {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	// Usar Id sempre Long
 	private Long id;
-		
+	
+	@Column	
 	private String nome;
+	
+	@Column
 	private String descricao;
+	
+	@Column
 	private String data;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn
 	private Pessoa admin;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn
 	private List<Tema> temas;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn
 	private List<Pessoa> PessoasQueConfirmaram;
-
+	
+	// Construtor vazio para o Hibernate criar os objetos
 	public Evento(){
 		this.temas = new ArrayList<Tema>();
 		this.PessoasQueConfirmaram = new ArrayList<Pessoa>();;
@@ -115,6 +136,19 @@ public class Evento implements Comparable<Evento> {
 		    }
 	    return 0;
 		  
+	}	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public List<Pessoa> getPessoasQueConfirmaram() {
+		return PessoasQueConfirmaram;
+	}
+	public void setPessoasQueConfirmaram(List<Pessoa> pessoasQueConfirmaram) {
+		PessoasQueConfirmaram = pessoasQueConfirmaram;
 	}
 	@Override
 	public int hashCode() {
@@ -173,10 +207,5 @@ public class Evento implements Comparable<Evento> {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
 
 }
