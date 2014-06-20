@@ -17,22 +17,25 @@
 		
 	</head>
 	<body>	
-	 
-        	
-		<center><h1><b>Sistema de Hackfests - Ci&ecirc;ncia da Computação - UFCG</b></h1></center>
-		<img class="centralizar" src="@routes.Assets.at("images/logo.jpg")" />
-		
-		<ul class="nav nav-pills">
-          <li><a href="/""><action= > In&iacute;cio</a></li>
-          <li><a href="/metasPorSemana">Ordenar por Semana</a></li>
-          <li><a href="/metasPorPrioridade">Ordenar por Prioridade</a></li>
-        </ul>
-		
-             
+	 	 <center><img class="centralizar" src="@routes.Assets.at("images/logo.png")" /> </center>
+        <ul class="nav nav-pills">
+          <li class="active"><a href="/""> In&iacute;cio</a></li>
+          <li><a href="/cadastro">Cadastrar um novo Hackfest</a></li>
+          
+        </ul>	
+        <div class="container form-horizontal panel panel-primary text-info" >
+        
+       
+		<center><h2><b>Sistema de Hackfests</b></h2></center>
+		<h4>Esse sistema lhe ajudar&aacute; a promover Hackfests de tecnologias e temas que sejam interessantes. 
+		<br> <br>  Um hackfest (ou hackathon) &eacute; um evento de programadores interessados em um tema ou tecnologia, que se re&uacute;nem e constroem algo no tema durante um dia.       
+        <br> <br> Participe! Essas s&atilde;o &oacute;timas oportunidades para aprender novas tecnologias e desenvolver o seu Network!    
+        </h4>
+        </div>
+        
+        <h2>@sistema.numDeEventos()</h2>
         
         
-            
-           
 		
 	</body>
 </html>

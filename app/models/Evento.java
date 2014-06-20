@@ -3,17 +3,10 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
+
+import org.hibernate.annotations.IndexColumn;
+
 
 
 @Entity(name = "Evento")
@@ -41,28 +34,28 @@ public class Evento implements Comparable<Evento> {
 	
 	@Column
 	private String emailAdmin;
+		
+	@ElementCollection
+	private List<String> temas;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn
-	private List<Tema> temas;
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn
+	@IndexColumn (name = "pessoas") 
 	private List<Pessoa> PessoasQueConfirmaram;
 	
 	// Construtor vazio para o Hibernate criar os objetos
 	public Evento(){
-		this.temas = new ArrayList<Tema>();
+		this.temas = new ArrayList<String>();
 		this.PessoasQueConfirmaram = new ArrayList<Pessoa>();;
 	}
 	public Evento(String nome, String descricao, String data, String nomeAdmin, String emailAdmin) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.data = data;
+		this.temas = new ArrayList<String>();
 		this.nomeAdmin = nomeAdmin;
 		this.emailAdmin = emailAdmin;
-		this.temas = new ArrayList<Tema>();
 		this.PessoasQueConfirmaram = new ArrayList<Pessoa>();
+		
 		
 	}
 	public String getNome() {
@@ -83,25 +76,13 @@ public class Evento implements Comparable<Evento> {
 	public void setData(String data) {
 		this.data = data;
 	}
-	public List<Tema> getTemas() {
+	public List<String> getTemas() {
 		return temas;
 	}
-	public void setTemas(List<Tema> temas) {
+	public void setTemas(List<String> temas) {
 		this.temas = temas;
 	}	
 		
-	public String getNomeAdmin() {
-		return nomeAdmin;
-	}
-	public void setNomeAdmin(String nomeAdmin) {
-		this.nomeAdmin = nomeAdmin;
-	}
-	public String getEmailAdmin() {
-		return emailAdmin;
-	}
-	public void setEmailAdmin(String emailAdmin) {
-		this.emailAdmin = emailAdmin;
-	}
 	public List<Pessoa> getNumDePessoasQueConfirmaram() {
 		return PessoasQueConfirmaram;
 	}
@@ -126,12 +107,12 @@ public class Evento implements Comparable<Evento> {
 		return this.PessoasQueConfirmaram.size();
 	}
 	
-	public void addTema(Tema tema) {
+	public void addTema(String tema) {
 		this.temas.add(tema);
 		
 	}
 	
-	public boolean removeTema(Tema tema) {
+	public boolean removeTema(String tema) {
 		return this.temas.remove(tema);
 		
 	}
@@ -160,71 +141,22 @@ public class Evento implements Comparable<Evento> {
 	public void setPessoasQueConfirmaram(List<Pessoa> pessoasQueConfirmaram) {
 		PessoasQueConfirmaram = pessoasQueConfirmaram;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime
-				* result
-				+ ((PessoasQueConfirmaram == null) ? 0 : PessoasQueConfirmaram
-						.hashCode());
-		result = prime * result + ((data == null) ? 0 : data.hashCode());
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result
-				+ ((emailAdmin == null) ? 0 : emailAdmin.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result
-				+ ((nomeAdmin == null) ? 0 : nomeAdmin.hashCode());
-		result = prime * result + ((temas == null) ? 0 : temas.hashCode());
-		return result;
+	public String getNomeAdmin() {
+		return nomeAdmin;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Evento other = (Evento) obj;
-		if (PessoasQueConfirmaram == null) {
-			if (other.PessoasQueConfirmaram != null)
-				return false;
-		} else if (!PessoasQueConfirmaram.equals(other.PessoasQueConfirmaram))
-			return false;
-		if (data == null) {
-			if (other.data != null)
-				return false;
-		} else if (!data.equals(other.data))
-			return false;
-		if (descricao == null) {
-			if (other.descricao != null)
-				return false;
-		} else if (!descricao.equals(other.descricao))
-			return false;
-		if (emailAdmin == null) {
-			if (other.emailAdmin != null)
-				return false;
-		} else if (!emailAdmin.equals(other.emailAdmin))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (nomeAdmin == null) {
-			if (other.nomeAdmin != null)
-				return false;
-		} else if (!nomeAdmin.equals(other.nomeAdmin))
-			return false;
-		if (temas == null) {
-			if (other.temas != null)
-				return false;
-		} else if (!temas.equals(other.temas))
-			return false;
-		return true;
+	public void setNomeAdmin(String nomeAdmin) {
+		this.nomeAdmin = nomeAdmin;
 	}
+	public String getEmailAdmin() {
+		return emailAdmin;
+	}
+	public void setEmailAdmin(String emailAdmin) {
+		this.emailAdmin = emailAdmin;
+	}
+	
+	
+	
+	
 	
 
 }

@@ -1,0 +1,68 @@
+@(sistema: Sistema)
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sistema de Hackfests</title>
+		<link href="@routes.Assets.at("css/bootstrap.min.css")" rel="stylesheet" media="screen">
+		<link rel="stylesheet" media="screen"
+		href="@routes.Assets.at("stylesheets/main.css")">
+		<link rel="shortcut icon" type="image/png"
+		href="@routes.Assets.at("images/favicon.png")">
+		<script
+		src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"
+		type="text/javascript">
+		</script>
+		
+	</head>
+	<body>	
+		<center><img class="centralizar" src="@routes.Assets.at("images/logo.png")" /> </center>
+        <ul class="nav nav-pills">
+          <li><a href="/""> In&iacute;cio</a></li>
+          <li class="active"><a href="/cadastrarHackfest">Cadastrar um novo Hackfest</a></li>
+          
+        </ul>	
+        <div class="container form-horizontal panel panel-primary text-info" >
+        
+       
+		<center><h2><b>Sistema de Hackfests - Cadastrar um novo Hackfest </b></h2></center>
+		
+		
+		<form action="@routes.Application.newEvento()" method="post">
+		
+			<h3>Adicionar novo Hackfest:</h3>
+			
+			<input class="input-xxlarge" type="text" size="80" maxlength="30" placeholder="T&iacute;tulo do hackfest" name="nome"><br><br>
+            <input class="input-xxlarge" type="text" size="180" maxlength="80" placeholder="Descreva o seu hackfest" name="descricao"><br><br>
+            <input class="input-xxlarge" type="text" size="40" maxlength="20" placeholder="Data do seu hackfest: dd/mm/aaaa" name="data"> <br>
+            <h4> Selecione o(s) tema(s) na qual o seu evento est&aacute; relacionado:</h4>
+            <label for="option1" class="checkbox inline"> <input
+				id="option1" type="checkbox" id="inlineCheckbox1" value="option1" name="Engenharia de Software">
+				Engenharia de Software
+			</label> 
+			
+			<label for="option2" class="checkbox inline" > <input
+				id="option2" type="checkbox" id="inlineCheckbox2" value="option2" name="Banco de Dados">
+				Banco de Dados
+			</label> 
+			
+			<label for="option3" class="checkbox inline"> <input
+				id="option3" type="checkbox" id="inlineCheckbox3" value="option3" name="Dados Abertos">
+				Dados Abertos
+			</label> 
+			
+			<label for="option3" class="checkbox inline"> <input
+				id="option3" type="checkbox" id="inlineCheckbox3" value="option3" name="Computa&ccedil;&atilde;o Desplugada">
+				Computa&ccedil;&atilde;o Desplugada
+			</label> 
+			
+			<label for="option3" class="checkbox inline"> <input
+				id="option3" type="checkbox" id="inlineCheckbox3" value="option3" name="Desenvolvimento para Web">
+				Desenvolvimento para Web
+			</label> 
+			<br>
+			<input class="input-xxlarge" type="text" size="30" maxlength="30" placeholder="Insira o seu nome" name="nomeAdmin">
+			<input class="input-xxlarge" type="text" size="50" maxlength="30" placeholder="Insira o Seu email" name="EmailAdmin">
+			<br><br><center><input type="submit" class="btn btn-primary" value="Cadastrar">  </center></div>
+             </form>
+             
+     </body>

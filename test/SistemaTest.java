@@ -17,16 +17,16 @@ public class SistemaTest {
 	private Evento evento8;
 	private Evento evento9;
 	private Evento evento10;
-	private Tema tema1;
-	private Tema tema2;
-	private Tema tema3;
-	private Tema tema4;
-	private Tema tema5;
 	private Pessoa pessoa1;
 	private Pessoa pessoa2;
 	private Pessoa pessoa3;
 	private Pessoa pessoa4;
 	private Pessoa pessoa5;
+	private String tema1;
+	private String tema2;
+	private String tema3;
+	private String tema4;
+	private String tema5;
 	
 	
 	@Before
@@ -50,11 +50,11 @@ public class SistemaTest {
 		evento9 = new Evento("Estruturas de dados", "Esse evento tem o objetivo de realizar atividades com estruturas de dados", "12/07/2014", "Jose", "jose@gmail.com");
 		evento10 = new Evento("Binarios", "Esse evento tem o objetivo de realizar atividades com binarios sem a utilizacao de computador", "11/09/2014", "Jose", "jose@gmail.com");
 		
-		tema1 = new Tema("Engenharia de Software");
-		tema2 = new Tema("Sistemas da Informacao");
-		tema3 = new Tema("Banco de Dados");
-		tema4 = new Tema("Computacao sem Computador");
-		tema5 = new Tema("Desenvolvimento para Web");
+		tema1 = "Engenharia de Software";
+		tema2 = "Sistemas da Informacao";
+		tema3 = "Banco de Dados";
+		tema4 = "Computacao sem Computador";
+		tema5 = "Desenvolvimento para Web";
 		
 		// 5 eventos no tema 1
 		evento1.addTema(tema1);

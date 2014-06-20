@@ -41,7 +41,8 @@ public class Sistema {
 		return this.eventos.remove(evento);
 	}
 	
-	public List<Evento> EventosPorTema(Tema tema){
+	public List<Evento> EventosPorTema(String tema){
+		
 		List<Evento> retorno = new ArrayList<Evento>();
 		for (Evento evento: this.eventos){
 			if (evento.getTemas().contains(tema)){
