@@ -27,42 +27,25 @@
 		<center><h2><b>Sistema de Hackfests - Cadastrar um novo Hackfest </b></h2></center>
 		
 		
-		<form action="MUDARAKI" method="post">
+		<form action="@routes.Application.newEvento()" method="post">
 		
 			<h3>Adicionar novo Hackfest:</h3>
 			
 			<input class="input-xxlarge" type="text" size="80" maxlength="30" placeholder="T&iacute;tulo do hackfest" name="nome"><br><br>
-            <input class="input-xxlarge" type="text" size="180" maxlength="80" placeholder="Descreva o seu hackfest" name="descricao"><br><br>
+            <input class="input-xxlarge" type="text" size="176" maxlength="80" placeholder="Descreva o seu hackfest" name="descricao"><br><br>
             <input class="input-xxlarge" type="text" size="40" maxlength="20" placeholder="Data do seu hackfest: dd/mm/aaaa" name="data"> <br>
-            <h4> Selecione o(s) tema(s) na qual o seu evento est&aacute; relacionado:</h4>
-            <label for="option1" class="checkbox inline"> <input
-				id="option1" type="checkbox" id="inlineCheckbox1" value="option1">
-				Engenharia de Software
-			</label> 
-			
-			<label for="option2" class="checkbox inline"> <input
-				id="option2" type="checkbox" id="inlineCheckbox2" value="option2">
-				Banco de Dados
-			</label> 
-			
-			<label for="option3" class="checkbox inline"> <input
-				id="option3" type="checkbox" id="inlineCheckbox3" value="option3">
-				Dados Abertos
-			</label> 
-			
-			<label for="option3" class="checkbox inline"> <input
-				id="option3" type="checkbox" id="inlineCheckbox3" value="option3">
-				Computa&ccedil;&atilde;o Desplugada
-			</label> 
-			
-			<label for="option3" class="checkbox inline"> <input
-				id="option3" type="checkbox" id="inlineCheckbox3" value="option3">
-				Desenvolvimento para Web
-			</label> 
+            <h4> <b>Apague</b> o(s) tema(s) na qual o seu evento n&atilde;o est&aacute; relacionado:</h4>
+            <input class="input-xlarge" size="30" id="focusedInput" type="text" value="Engenharia de Software" name=tema1>
+            <input class="input-xlarge" size="30" id="focusedInput" type="text" value="Banco de Dados" name=tema2>
+            <input class="input-xlarge" size="30" id="focusedInput" type="text" value="Sistema da Informa&ccedil;&atilde;o" name=tema3>
+            <input class="input-xlarge" size="30" id="focusedInput" type="text" value="Computa&ccedil;&atilde;o Desplugada" name=tema4>
+            <input class="input-xlarge" size="30" id="focusedInput" type="text" value="Desenvolvimento Web" name=tema5>
+            
+			<br>
 			<br>
 			<input class="input-xxlarge" type="text" size="30" maxlength="30" placeholder="Insira o seu nome" name="nomeAdmin">
 			<input class="input-xxlarge" type="text" size="50" maxlength="30" placeholder="Insira o Seu email" name="EmailAdmin">
-			<input type="submit" class="btn btn-primary" value="Cadastrar">  </div>
+			<br><br><center><input type="submit" class="btn btn-primary" value="Cadastrar">  </center></div>
              </form>
              
      </body>

@@ -1,0 +1,35 @@
+@(sistema: Sistema, tema: String)
+ <div class="container form-horizontal panel panel-primary text-info" >
+<h2>Eventos que envolvem @tema:</h2>
+
+<div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome </th>
+                            <th>Descricao </th>
+                            <th>Data </th>
+                             
+                            <th>A&ccedil;&otilde;es </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @for(evento <- sistema.EventosPorTema(tema)) {
+                    	
+                        <tr>
+                            <td>@evento.getNome()</td>
+                            <td>@evento.getDescricao()</td>
+                            <td>@evento.getData()</td>
+                            
+                            <td>
+                                                    
+                            <form action="@routes.Application.participar(evento.getId())" method="post"> 
+                                <input type="submit" class="btn btn-primary" value="Participar">
+                            </form> 
+                            </td>
+                        </tr>
+                        
+                    }
+                    </tbody>
+                </table>
+            </div></div>

@@ -53,7 +53,7 @@ public class SistemaTest {
 		tema1 = "Engenharia de Software";
 		tema2 = "Sistemas da Informacao";
 		tema3 = "Banco de Dados";
-		tema4 = "Computacao sem Computador";
+		tema4 = "Computacao Desplugada";
 		tema5 = "Desenvolvimento para Web";
 		
 		// 5 eventos no tema 1

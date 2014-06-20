@@ -1,0 +1,34 @@
+@(sistema: Sistema, eventos: List[Evento])
+
+<h2>Eventos do tema1</h2>
+<div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome </th>
+                            <th>Descricao </th>
+                            <th>Data </th>
+                             
+                            <th>A&ccedil;&otilde;es </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @for(evento <- eventos) {
+                    	
+                        <tr>
+                            <td>@evento.getNome()</td>
+                            <td>@evento.getDescricao()</td>
+                            <td>@evento.getData()</td>
+                            
+                            <td>
+                                                    
+                            <form action="MUDARAKI" method="post"> 
+                                <input type="submit" class="btn btn-primary" value="Participar">
+                            </form> 
+                            </td>
+                        </tr>
+                        
+                    }
+                    </tbody>
+                </table>
+            </div>
